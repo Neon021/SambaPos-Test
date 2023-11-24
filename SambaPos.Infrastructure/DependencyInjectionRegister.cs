@@ -22,7 +22,9 @@ public static class DependencyInjectionRegister
     {
         services.AddDbContext<SambaPosDbContext>(options =>
         //ConnectionString is accessed from the user-secrets of the Api layer which passed by IConfiguration
-            options.UseNpgsql(configuration.GetConnectionString("Default")));
+        options.UseNpgsql("Server=localhost;Port=5432;User Id=postgres;Password=admin;Database=IAmFurkan"));
+            //options.UseNpgsql(configuration.GetConnectionString("Default")));
+            //options.UseInMemoryDatabase("Data Source: default");
 
         services.AddScoped<IOrderRepository, OrderRepository>();
 
