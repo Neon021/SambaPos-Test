@@ -45,4 +45,8 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
 
         return menu;
     }
+
+#pragma warning disable CS8618
+    private Order() { }
+#pragma warning restore CS8618
 }
