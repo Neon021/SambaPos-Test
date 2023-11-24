@@ -1,5 +1,6 @@
 using SambaPos.Api;
 using SambaPos.Application;
+using SambaPos.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
