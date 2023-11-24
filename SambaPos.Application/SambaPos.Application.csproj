@@ -2,6 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SambaPos.Domain\SambaPos.Domain.csproj" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+	  <PackageReference Include="Mediatr" Version="12.1.1" />
+	  <PackageReference Include="FluentValidation" Version="11.7.1" />
+	  <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+	  <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
   </ItemGroup>
 
   <PropertyGroup>
