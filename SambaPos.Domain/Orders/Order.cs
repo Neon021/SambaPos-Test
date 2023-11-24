@@ -1,5 +1,4 @@
 ﻿using SambaPos.Domain.Common;
-using SambaPos.Domain.Hosts.ValueObjects;
 using SambaPos.Domain.Orders.Entities;
 using SambaPos.Domain.Orders.ValueObjects;
 

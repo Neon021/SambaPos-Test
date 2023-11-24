@@ -5,7 +5,6 @@ using SambaPos.Application.Orders.Commands.Common;
 using SambaPos.Application.RabbitMQ.Consumer;
 using SambaPos.Domain.Orders;
 using SambaPos.Domain.Orders.Entities;
-using SambaPos.Domain.Orders.ValueObjects;
 
 namespace SambaPos.Application.Orders.Commands.CreateOrder;
 public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, ErrorOr<OrderCreationResult>>

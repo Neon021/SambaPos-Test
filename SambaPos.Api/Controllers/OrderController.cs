@@ -3,8 +3,8 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SambaPos.Application.Orders.Commands.Common;
 using SambaPos.Application.Orders.Commands.CreateOrder;
-using SambaPos.Application.Orders.Common;
 using SambaPos.Contracts.Orders;
 
 namespace SambaPos.Api.Controllers;
