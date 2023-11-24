@@ -1,11 +1,12 @@
 ﻿using ErrorOr;
 using MediatR;
 using SambaPos.Application.Common.Interfaces.Persistance;
+using SambaPos.Application.Orders.Common;
 using SambaPos.Domain.Orders;
 using SambaPos.Domain.Orders.Entities;
 
 namespace SambaPos.Application.Orders.Commands.CreateOrder;
-public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, ErrorOr<Order>>
+public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, ErrorOr<OrderCreationResult>>
 {
     private readonly IOrderRepository _orderRepository;
 
@@ -14,7 +15,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Err
         _orderRepository = orderRepository;
     }
 
-    public async Task<ErrorOr<Order>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<ErrorOr<OrderCreationResult>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;
 
@@ -28,6 +29,6 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Err
 
         _orderRepository.Add(order);
 
-        return order;
+        return new OrderCreationResult(order);
     }
 }

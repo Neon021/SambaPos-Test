@@ -1,6 +1,7 @@
 ﻿using ErrorOr;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SambaPos.Application.Orders.Commands.CreateOrder;
 using SambaPos.Application.Orders.Common;
@@ -8,7 +9,8 @@ using SambaPos.Contracts.Orders;
 
 namespace SambaPos.Api.Controllers;
 
-[Route("/order")]
+[ApiController]
+[Route("order")]
 public class OrderController : ApiController
 {
     private readonly ISender _mediatr;
@@ -19,10 +21,10 @@ public class OrderController : ApiController
         _mediatr = mediatr;
         _mapper = mapper;
     }
-    [HttpPost]
-    public async Task<IActionResult> CreateMenu(
-        CreateOrderRequest request,
-        string hostId)
+
+    [AllowAnonymous]
+    [Route("create")]
+    public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
     {
         CreateOrderCommand command = _mapper.Map<CreateOrderCommand>(request);
         ErrorOr<OrderCreationResult> orderResult = await _mediatr.Send(command);
