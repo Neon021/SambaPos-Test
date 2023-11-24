@@ -13,32 +13,32 @@ public sealed class Order : AggregateRoot<OrderId, Guid>
 
     public IReadOnlyList<OrderContent> Content => _contents.AsReadOnly();
 
-    public HostId HostId { get; private set; }
+    //public HostId HostId { get; private set; }
     public DateTime CreatedDateTime { get; private set; }
     public DateTime UpdatedDateTime { get; private set; }
 
     public Order(
         OrderId orderId,
-        HostId hostId,
+        //HostId hostId,
         string name,
         string description,
         List<OrderContent>? contents) : base(orderId)
     {
-        HostId = hostId;
+        //HostId = hostId;
         Name = name;
         Description = description;
         _contents = contents;
     }
 
     public static Order Create(
-        HostId hostId,
+        //HostId hostId,
         string name,
         string description,
         List<OrderContent>? contents = null)
     {
         Order menu = new(
             OrderId.CreateUnique(),
-            hostId,
+            //hostId,
             name,
             description,
             contents ?? new());

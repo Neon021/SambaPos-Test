@@ -1,11 +1,10 @@
-﻿using SambaPos.Domain.Hosts.ValueObjects;
-using ErrorOr;
+﻿using ErrorOr;
 using MediatR;
 using SambaPos.Domain.Orders;
 
 namespace SambaPos.Application.Orders.Commands.CreateOrder;
 public record CreateOrderCommand(
-    HostId HostId,
+    //HostId HostId,
     string Name,
     string Description,
     List<CreateOrderContentsCommand> Contents) : IRequest<ErrorOr<Order>>;

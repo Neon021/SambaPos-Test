@@ -19,7 +19,7 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Err
         await Task.CompletedTask;
 
         var order = Order.Create(
-            hostId: request.HostId,
+            //hostId: request.HostId,
             name: request.Name,
             description: request.Description,
             contents: request.Contents.ConvertAll(contents => OrderContent.Create(
