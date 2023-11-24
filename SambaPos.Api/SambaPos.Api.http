@@ -1,6 +1,17 @@
 @SambaPos.Api_HostAddress = http://localhost:5119
 
-GET {{SambaPos.Api_HostAddress}}/weatherforecast/
+GET {{SambaPos.Api_HostAddress}}/order/
 Accept: application/json
+
+{
+    "name": "Test Order",
+    "description": "An order from an onlince food service",
+    "contents": [
+        {
+             "name": "French Fries",
+             "description": "Deep fried potato"
+        }
+    ]
+}
 
 ###
