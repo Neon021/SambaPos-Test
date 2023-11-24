@@ -1,6 +1,6 @@
 ﻿using ErrorOr;
 using MediatR;
-using SambaPos.Application.Orders.Common;
+using SambaPos.Application.Orders.Commands.Common;
 using SambaPos.Domain.Orders;
 
 namespace SambaPos.Application.Orders.Commands.CreateOrder;
