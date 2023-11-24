@@ -1,16 +1,15 @@
-# Use the .NET SDK as a base image
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-WORKDIR /app
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
+WORKDIR /App
 
-# Copy the solution files into the container
-COPY . .
-
-# Build the solution
+# Copy everything
+COPY . ./
+# Restore as distinct layers
 RUN dotnet restore
-RUN dotnet build --configuration Release
+# Build and publish a release
+RUN dotnet publish -c Release -o out
 
-# Expose the port your application will listen on
-EXPOSE 5000
-
-# Start the application
-CMD ["dotnet", "SambaPos.Api/bin/Release/net7.0/SambaPos.Api.dll"]
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
+WORKDIR /App
+COPY --from=build-env /App/out .
+ENTRYPOINT ["dotnet", "SambaPos.Api.dll"]

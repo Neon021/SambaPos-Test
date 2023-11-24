@@ -28,7 +28,7 @@ public class ConsumerService : IConsumerService
     }
 
 
-    public Task ConsumeMessage<T>(Action<T> messageHandler)
+    public Task<TResult> ConsumeMessage<TMessage, TResult>(Func<TMessage, Task<TResult>> messageHandler)
     {
         try
         {
@@ -46,19 +46,18 @@ public class ConsumerService : IConsumerService
                 try
                 {
                     var body = eventArgs.Body.ToArray();
-                    var message = JsonConvert.DeserializeObject<T>(Encoding.UTF8.GetString(body));
-                    _logger.LogInformation($"Receiver message: {message}");
+                    var message = JsonConvert.DeserializeObject<TMessage>(Encoding.UTF8.GetString(body));
+                    _logger.LogInformation($"Received message: {message}");
 
-                    messageHandler(message);
+                    var result = await messageHandler(message);
 
-                    _channel.BasicAck(eventArgs.DeliveryTag, multiple: true);
+                    _channel.BasicAck(eventArgs.DeliveryTag, multiple: false);
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError($"Error in Received Event: {ex.Message}");
                 }
             };
-
         }
         catch (Exception ex)
         {
@@ -66,7 +65,7 @@ public class ConsumerService : IConsumerService
             CloseConnection();
         }
 
-        return Task.CompletedTask;
+        return Task.FromResult(default(TResult));
     }
 
     public Task CloseConnection()
